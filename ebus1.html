@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<!-- linking the external css to each page  -->
+	<link rel="stylesheet" href="style.css">
+
+	<head>
+	<!-- Descriptions -->
+		<title>E-Business</title>
+		<meta charset="utf-8">
+		<meta name="author" content="Ellen Hegarty 119348066">
+		<meta name="description" content="IS1113 Project">
+	</head>
+	
+	
+	<body>
+	<!--   header with the title of the section the user is in  -->
+		<div class="header">
+		  <h1>EBusiness</h1>
+		</div>
+		
+	<!-- body gets its own section to keep the content together -->
+	<!-- radio buttons with the consulting services to allow customers to select their desired service-->
+	<div id="content">	
+		<center><h3>Select a Consulting Service</h3>
+            <input type="radio" id="h" name="service" value="200" onclick="calcSub(this.value)">
+			<label for="hyperautomation">Hyperautomation @ €200</label><br>
+            <input type="radio" id="m" name="service" value="500" onclick="calcSub(this.value)">
+            <label for="MultiExperience">MultiExperience @ €500</label><br>
+            <input type="radio" id="d" name="service" value="1000" onclick="calcSub(this.value)">
+            <label for="Distributed Cloud">Distributed Cloud @ €1000</label></p>
+
+            <p id="SubTotal"></p>
+            <p id="Discount"></p>
+            <p id="VAT"></p>
+            <p id="Total"></p>
+    
+            <button class="button button1" onclick="calcDisp()">Calculate Cost</button>
+            <button class="button button2" onclick="uncheck()">Clear Choice</button>
+        </center>
+
+	</div>
+		
+	<script>
+
+		var argSelection = 0;
+		var argDiscount, argVat, argPrice;
+   
+		function calcSub() {
+        if (h.checked == true){
+        argSelection = h.value;
+        }
+        else if (m.checked == true){
+        argSelection = m.value;
+        }
+        else if (d.checked == true){
+        argSelection = d.value;
+        }
+        calcVatTotal(argSelection);
+		}
+
+	function calcVatTotal(parmSelection){
+    argDiscount = 0.05 * parmSelection;
+    argVat =   -0.2 * parmSelection;
+    argPrice = parmSelection -argVat -argDiscount;
+    display();
+	}
+	function calcDisp() {
+		document.getElementById("SubTotal").innerHTML = "The current subtotal is " + " " + "€" + argSelection;
+		document.getElementById("Discount").innerHTML = "The discount is " + " " + "€" + argDiscount.toFixed(2);
+		document.getElementById("VAT").innerHTML = "The Vat is " + " " + "€" + argVat.toFixed(2);
+		document.getElementById("Total").innerHTML = "The Total is "  + " " + "€"+ argPrice.toFixed(2);
+	}
+ 
+
+	function uncheck() {
+	  document.getElementById("h").checked = false;
+	  document.getElementById("m").checked = false;
+	  document.getElementById("d").checked = false;
+	}
+
+</script>
+
+	
+	
+	<!-- the navigation bar with an active class to highlight which section the user is in   -->
+	<div id="sidenav">
+		<ul>
+		  <li><a href="home.html">Home</a></li>
+		  <li><a href="personal.html">Personal Details</a></li>
+		  <li><a href="work.html">Work Experience</a></li>
+		  <li><a href="education.html">Education</a></li>
+		  <li><a href="intrests.html">Interests</a></li>
+		  <li><a href="consulting.html">Consulting Services</a></li>
+		  <li><a class="active" href="ebus1.html">EBusiness</a></li>
+		</ul>
+	</div>
+	</body>
+</html>
