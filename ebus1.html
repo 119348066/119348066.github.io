@@ -19,70 +19,6 @@
 		  <h1>EBusiness</h1>
 		</div>
 		
-	<!-- body gets its own section to keep the content together -->
-	<!-- radio buttons with the consulting services to allow customers to select their desired service-->
-	<div id="content">	
-		<center><h3>Select a Consulting Service</h3>
-            <input type="radio" id="h" name="service" value="200" onclick="calcSub(this.value)">
-			<label for="hyperautomation">Hyperautomation @ €200</label><br>
-            <input type="radio" id="m" name="service" value="500" onclick="calcSub(this.value)">
-            <label for="MultiExperience">MultiExperience @ €500</label><br>
-            <input type="radio" id="d" name="service" value="1000" onclick="calcSub(this.value)">
-            <label for="Distributed Cloud">Distributed Cloud @ €1000</label></p>
-
-            <p id="SubTotal"></p>
-            <p id="Discount"></p>
-            <p id="VAT"></p>
-            <p id="Total"></p>
-    
-            <button class="button button1" onclick="calcDisp()">Calculate Cost</button>
-            <button class="button button2" onclick="uncheck()">Clear Choice</button>
-        </center>
-
-	</div>
-		
-	<script>
-
-		var argSelection = 0;
-		var argDiscount, argVat, argPrice;
-   
-		function calcSub() {
-        if (h.checked == true){
-        argSelection = h.value;
-        }
-        else if (m.checked == true){
-        argSelection = m.value;
-        }
-        else if (d.checked == true){
-        argSelection = d.value;
-        }
-        calcVatTotal(argSelection);
-		}
-
-	function calcVatTotal(parmSelection){
-    argDiscount = 0.05 * parmSelection;
-    argVat =   -0.2 * parmSelection;
-    argPrice = parmSelection -argVat -argDiscount;
-    display();
-	}
-	function calcDisp() {
-		document.getElementById("SubTotal").innerHTML = "The current subtotal is " + " " + "€" + argSelection;
-		document.getElementById("Discount").innerHTML = "The discount is " + " " + "€" + argDiscount.toFixed(2);
-		document.getElementById("VAT").innerHTML = "The Vat is " + " " + "€" + argVat.toFixed(2);
-		document.getElementById("Total").innerHTML = "The Total is "  + " " + "€"+ argPrice.toFixed(2);
-	}
- 
-
-	function uncheck() {
-	  document.getElementById("h").checked = false;
-	  document.getElementById("m").checked = false;
-	  document.getElementById("d").checked = false;
-	}
-
-</script>
-
-	
-	
 	<!-- the navigation bar with an active class to highlight which section the user is in   -->
 	<div id="sidenav">
 		<ul>
@@ -93,8 +29,123 @@
 		  <li><a href="intrests.html">Interests</a></li>
 		  <li><a href="consulting.html">Consulting Services</a></li>
 		  <li><a class="active" href="ebus1.html">EBusiness</a></li>
-		  <li><a href="https://119348066.github.io/index.html.html">GitHub</a></li>
 		</ul>
 	</div>
+		
+	<!-- body gets its own section to keep the content together -->
+	<!-- radio buttons with the consulting services to allow customers to select their desired service-->
+	 <center>
+	 <div id="content">
+        <div class="form">
+        <form name="intCalc" method="post" action="eBus2.php">
+        <center>
+            <table cellspacing="20">
+                <tr>
+                    <td><b>Package</b></td>
+                </tr>
+                <tr>
+                    <td>Hyperautomation @ $200</td>
+                    <td><input type="radio" id="Hyperautomation" name="rdoGroup" value="200"  required /></td>
+                </tr>
+                <tr>
+                    <td>Multiexperience @ $500</td>
+                    <td><input type="radio" id="Multiexperience" name="rdoGroup" value="500"  /></td>
+                </tr>
+                <tr>
+                    <td>Distributed Cloud @ $1000</td>
+                    <td><input type="radio" id="DistributedCloud" name="rdoGroup" value="1000" /></td>
+                </tr>
+            </table>
+        </center>
+        <br/>
+            <center>
+                <table cellspacing="10">
+				<tr>
+					<td><b></b></td>
+					<td><b>Amount</b></td>
+				</tr>
+				<tr>
+					<td>Sub Total</td>
+					<td><input type="text" id="txtSubTot" name="txtSub" readonly  required/></td>
+				</tr>
+				<tr>
+					<td>Discount @ 5%</td>
+					<td><input type="text" id="txtDisc" name="txtDisc" readonly  required/></td>
+				</tr>
+				<tr>
+					<td>+ VAT @ 20%</td>
+					<td><input type="text" id="txtVAT" name="txtVAT" readonly required /></td>
+				</tr>
+				<tr>
+					<td>Total</td>
+					<td><input type="text" id="txtTotal" name="txtTotal" value="" readonly required/></td>
+				</tr>
+				</table>
+			</center>
+       
+        <br />
+            <center>
+				<input type="button" name="btnCalc" id="btnCalc" onclick="calcSub()" value="Calculate Amount" />
+				<input type="reset" name="btnClear" id="btnClear" value="Clear"/>
+			</center>
+			
+            </form>
+        </div>
+	</div>
+		
+	 </center>
+	 
+	 
+        <script type="text/javascript">
+              function calcSub(){
+                    var argSelection = parseFloat(document.getElementById('txtSubTot').value);
+                    var Hyperautomation = parseFloat(document.getElementById('Hyperautomation').value);
+                    var Multiexperience = parseFloat(document.getElementById('Multiexperience').value);
+                    var DistributedCloud = parseFloat(document.getElementById('DistributedCloud').value);
+                   
+                   
+                    if (document.getElementById('Hyperautomation').checked) {
+                        document.intCalc.txtSubTot.value = Hyperautomation;
+                        argSelection = Hyperautomation;
+                        calcVatTotal(argSelection);
+                       
+                    }
+                   else if (document.getElementById('Multiexperience').checked) {
+                        document.intCalc.txtSubTot.value = Multiexperience;
+                        argSelection = Multiexperience;
+                        calcVatTotal(argSelection);
+                       
+                    }
+                    else if (document.getElementById('DistributedCloud').checked) {
+                        document.intCalc.txtSubTot.value = DistributedCloud;
+                        argSelection = DistributedCloud;
+                        calcVatTotal(argSelection);
+                    }
+                }
+               
+               
+                function calcVatTotal(parmSelection) {
+                    var argsubTotal = parseFloat(parmSelection);
+                    var argdiscountAmt = parseFloat(argsubTotal * .05);
+                    var argvatAmt = parseFloat(argsubTotal * .20);    
+                    var argtotalPrice = parseFloat(argsubTotal - argdiscountAmt + argvatAmt);
+                   calcDisp(argsubTotal, argdiscountAmt,argvatAmt,argtotalPrice);
+                   
+                 
+                }
+
+				function calcDisp(parmsubTotal, parmdiscountAmt, parmvatAmt, parmtotalPrice){
+				document.intCalc.txtSubTot.value = parmsubTotal;
+				document.intCalc.txtDisc.value = parmdiscountAmt;
+				document.intCalc.txtVAT.value = parmvatAmt;
+				document.intCalc.txtTotal.value = parmtotalPrice;
+				}
+               
+               
+        </script>
+
+	
+	
+	
 	</body>
 </html>
